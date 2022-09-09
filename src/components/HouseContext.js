@@ -54,33 +54,41 @@ const HouseContextProvider = ({children}) => {
                 return house
             }
 
+            //all values are default
             if (isDefault(country) && isDefault(property) && isDefault(price)) {
                 return house
             }
+
+            //country is not default
             if (!isDefault(country) && isDefault(property) && isDefault(price)) {
                 return house.country === country
             }
+
+            //property is not default
             if (isDefault(country) && !isDefault(property) && isDefault(price)) {
                 return house.type === property
             }
-            if (isDefault(country) && isDefault(property) && isDefault(price)) {
+
+            //price is not default
+            if (isDefault(country) && isDefault(property) && !isDefault(price)) {
                 if (housePrice >= minPrice && housePrice <= maxPrice) {
                     return house
                 }
             }
-            if (!isDefault(country) && isDefault(property) && !isDefault(price)) {
-                return house
-            }
+
+            // country and property is not default
             if (!isDefault(country) && !isDefault(property) && isDefault(price)) {
                 return house.country === country && house.type === property
             }
 
+            // country and price is not default
             if (!isDefault(country) && isDefault(property) && !isDefault(price)) {
                 if (housePrice >= minPrice && housePrice <= maxPrice) {
-                    return house.country === country
+                    return house.country === country && house
                 }
             }
 
+            // property and price is not default
             if (isDefault(country) && !isDefault(property) && !isDefault(price)) {
                 if (housePrice >= minPrice && housePrice <= maxPrice) {
                     return house.type === property
